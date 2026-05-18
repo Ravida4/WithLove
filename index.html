@@ -28,7 +28,7 @@
       z-index: 1;
     }
 
-    h1 { color: #e63946; }
+    h1{ color: #ff9a9e; }
     p { white-space: pre-line; line-height: 1.7; }
 
     .heart {
@@ -42,7 +42,7 @@
       padding: 10px 20px;
       border-radius: 25px;
       border: none;
-      background: #e63946;
+      background: #ff9a9e;
       color: white;
       cursor: pointer;
     }
@@ -112,9 +112,9 @@
   </div>
 </div>
 
-<div class="card">
+<div class="card" id="maindiv">
   <div class="heart">❤️</div>
-  <h1>Bujju, I miss you!</h1>
+  <h1>Bujju, been an year!</h1>
 
   <p id="message">
 Been an year since we met in person already.
@@ -122,12 +122,26 @@ It feels an year has passed so quick. We had many ups and downs. At the end of t
 
 You will be my priority forever and will try to express myself different this time. I've known this for a while in relationship but being away from you has taught me very much on how you've become part of my life.
 
-I miss what we had Buj, like really. And I would really like another chance to do this right — with more respect, patience, and care. Ninnu jagrathaga chuskunta <3
+I miss what we had Buj, like really. And I would really like another chance to do this right — with more respect, patience, and care. Ninnu jagrathaga chuskunta "<3"
 
 If there's a small chance that this could happen, I'd be most happiest person ra.
   </p>
 
-  <button onclick="changeMessage()">One last thing...</button>
+  <button onclick="changeMessage()">Next...</button>
+  <div id="smileContainer" style="
+  display:none;
+  opacity:0;
+  transition: opacity 0.6s ease;
+  margin-top:15px;
+">
+  <button onclick="smallSmile()">Click if this made you smile 🙂</button>
+  
+  <p id="smileResponse" style="
+    margin-top:12px;
+    color:#555;
+    display:none;
+  "></p>
+</div>
 </div>
 
 <!-- Music -->
@@ -173,16 +187,43 @@ If there's a small chance that this could happen, I'd be most happiest person ra
   }
 
   function changeMessage() {
-    document.getElementById("message").innerText =
-`No pressure.
+    document.getElementById("maindiv").innerHTML =
+    `
+      <div class="heart">❤️</div>
+  <h3>Definitely missing you a lot!</h3>
+
+  <p id="message">
+No pressure.
 
 Just something I needed to say honestly.
 
 Take your time. I love how we both appreciated little things in life!
 
-I wish we get one chance to make this work. ❤️🕊️`;
+I will fix everything that is a problem for us.
 
+I wish we get one chance🧿 to make this work. ❤️🕊️
+  </p>
+
+<button onclick="changeMessage2()">up next!😊</button>
+    `
     appInsights.trackEvent({ name: "read_full_message", properties: { user: user } });
+  }
+
+  function changeMessage() {
+    document.getElementById("maindiv").innerHTML =
+    `
+      <div class="heart">❤️</div>
+    <h3>Definitely missing us a lot here in Blr!</h3>
+  
+    <image src="image2.jpg" style="
+  width:220px;
+  height:auto;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+">
+</br>
+    `
+    appInsights.trackEvent({ name: "load_image", properties: { user: user } });
   }
 
   
