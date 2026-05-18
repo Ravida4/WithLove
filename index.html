@@ -152,7 +152,9 @@ If there's a small chance that this could happen, I'd be most happiest person ra
   Spent my last evening making this to be memorable. Take care Buj❤️
 </footer>
 <script>
-  const txnId = crypto.randomUUID();
+  const txnId = (crypto && crypto.randomUUID)
+  ? crypto.randomUUID()
+  : Date.now().toString();
   console.log(txnId);
   const appInsights = new Microsoft.ApplicationInsights.ApplicationInsights({
     config: {
