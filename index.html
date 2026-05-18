@@ -152,6 +152,8 @@ If there's a small chance that this could happen, I'd be most happiest person ra
   Spent my last evening making this to be memorable. Take care Buj❤️
 </footer>
 <script>
+  const txnId = crypto.randomUUID();
+  console.log(txnId);
   const appInsights = new Microsoft.ApplicationInsights.ApplicationInsights({
     config: {
           connectionString: "InstrumentationKey=6abfa2a5-d7ce-4da6-84ff-3482a76ea5f7;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=30538822-eb47-4649-b9bb-1234"
@@ -167,13 +169,13 @@ If there's a small chance that this could happen, I'd be most happiest person ra
 
     appInsights.trackEvent({
       name: "page_open",
-      properties: { user: user || "unknown" }
+      properties: { user: user || "unknown", txnId: txnId}
     });
   
   function okAnyways() {
     document.getElementById("popup1").style.display = "none";
 
-    appInsights.trackEvent({ name: "popup1_closed", properties: { user: user || "unknown" } });
+    appInsights.trackEvent({ name: "popup1_closed", properties: { user: user || "unknown", txnId: txnId} });
    document.getElementById("popup2").style.display = 'flex';
   }
 
@@ -181,7 +183,7 @@ If there's a small chance that this could happen, I'd be most happiest person ra
     document.getElementById("bgMusic").play();
     document.getElementById("popup2").style.display = "none";
 
-    appInsights.trackEvent({ name: "music_enabled", properties: { user: user || "unknown" } });
+    appInsights.trackEvent({ name: "music_enabled", properties: { user: user || "unknown", txnId: txnId } });
   }
 
   function changeMessage() {
@@ -191,20 +193,20 @@ If there's a small chance that this could happen, I'd be most happiest person ra
   <h3>Definitely missing us a lot!</h3>
 
   <p id="message">
-No pressure.
+    No pressure.
 
-Just something I needed to say honestly.
+    Just something I needed to say honestly.
 
-Take your time. I love how we both appreciated little things in life!
+    Take your time. I love how we both appreciated little things in life!
 
-I will fix everything that is a problem for us and communicate better. I will not repeat the bad day.
+    I will fix everything that is a problem for us and communicate better. I will not repeat the bad day.
 
-I wish we get one chance🧿 to make this work. ❤️🕊️
+    I wish we get one chance🧿 to make this work. ❤️🕊️
   </p>
 
-<button onclick="changeMessage2()">up next!😊</button>
+    <button onclick="changeMessage2()">up next!😊</button>
     `
-    appInsights.trackEvent({ name: "read_full_message", properties: { user: user || "unknown" } });
+    appInsights.trackEvent({ name: "read_full_message", properties: { user: user || "unknown", txnId: txnId } });
   }
 
   function changeMessage2() {
@@ -222,7 +224,7 @@ I wish we get one chance🧿 to make this work. ❤️🕊️
 </br>
 <button onclick="likedit()">Like it?😊</button>
     `
-    appInsights.trackEvent({ name: "load_image", properties: { user: user || "unknown" } });
+    appInsights.trackEvent({ name: "load_image", properties: { user: user || "unknown", txnId: txnId } });
   }
 
   function likedit() {
@@ -232,7 +234,7 @@ I wish we get one chance🧿 to make this work. ❤️🕊️
     <p>I didn’t expect you to click that… but I’m glad you did😉. Take care…</p>
 </br>
     `
-    appInsights.trackEvent({ name: "liked_it", properties: { user: user || "unknown" } });
+    appInsights.trackEvent({ name: "liked_it", properties: { user: user || "unknown", txnId: txnId } });
   }
 
   
