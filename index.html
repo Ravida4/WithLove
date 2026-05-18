@@ -58,11 +58,19 @@
       z-index: 10;
     }
 
-    .popup {
+    .popup1 {
       background: white;
       padding: 25px;
       border-radius: 15px;
       text-align: center;
+    }
+
+    #popup2 {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      display: none;
     }
 
     footer {
@@ -89,8 +97,15 @@
 
 <body>
 
-<div class="overlay" id="popup">
-  <div class="popup">
+  <div class="overlay" id="popup1">
+  <div class="popup1">
+    <h3>Buj, I'd recommend viewing this on desktop</h3>
+    <button onclick="okAnyways()">Ok, anyways!</button>
+  </div>
+</div>
+
+<div class="overlay" id="popup2">
+  <div class="popup2">
     <h3>🎵  Buj, this enables music.
       Make sure you're in a comfy place </h3>
     <button onclick="enableMusic()">Plaaay!</button>
@@ -103,15 +118,9 @@
 
   <p id="message">
   Been an year already.
-I always keep thinking about you and us and how it went wrong. I know I messed up, and I’m really sorry for that. I wish I could go back and do things differently, but since I can’t, I just want to be honest about how I feel and what I’ve learned.
+It feels an year has passed so quick. We had many ups and downs. At the end of the day, I love you more than anyone else.
 
-I understand now where I went wrong — not just what happened, but how I made you feel. And that’s something I genuinely regret.
-
-I’m not here to give excuses. I’ve been working on myself, quietly — changing the things that needed to change, understanding what I didn’t before, and becoming more aware of how I show up for someone I care about.
-
-I know words alone don’t mean much, especially after everything. And I don’t expect you to just believe me instantly.
-
-But I do want you to know this is coming from a real place — not fear of losing you, but understanding your value.
+You will be my priority forever and will try to express myself different this time. I've known this for a while in relationship but being away from you has taught me very much on how you've become part of my life.
 
 I miss what we had Buj, like really. And I would really like another chance to do this right — with more respect, patience, and care.
 
@@ -148,10 +157,17 @@ If there's a small chance that this could happen, I'm all ears ra.
       properties: { user: user }
     });
   }
+  
+  function okAnyways() {
+    document.getElementById("popup1").style.display = "none";
+
+    appInsights.trackEvent({ name: "popup1_closed", properties: { user: user } });
+   document.getElementById("popup2").style.display = 'flex';
+  }
 
   function enableMusic() {
     document.getElementById("bgMusic").play();
-    document.getElementById("popup").style.display = "none";
+    document.getElementById("popup2").style.display = "none";
 
     appInsights.trackEvent({ name: "music_enabled", properties: { user: user } });
   }
