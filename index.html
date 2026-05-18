@@ -165,17 +165,15 @@ If there's a small chance that this could happen, I'd be most happiest person ra
   const params = new URLSearchParams(window.location.search);
   const user = params.get("user");
 
-  if (user) {
     appInsights.trackEvent({
       name: "page_open",
-      properties: { user: user }
+      properties: { user: user || "unknown" }
     });
-  }
   
   function okAnyways() {
     document.getElementById("popup1").style.display = "none";
 
-    appInsights.trackEvent({ name: "popup1_closed", properties: { user: user } });
+    appInsights.trackEvent({ name: "popup1_closed", properties: { user: user || "unknown" } });
    document.getElementById("popup2").style.display = 'flex';
   }
 
@@ -183,7 +181,7 @@ If there's a small chance that this could happen, I'd be most happiest person ra
     document.getElementById("bgMusic").play();
     document.getElementById("popup2").style.display = "none";
 
-    appInsights.trackEvent({ name: "music_enabled", properties: { user: user } });
+    appInsights.trackEvent({ name: "music_enabled", properties: { user: user || "unknown" } });
   }
 
   function changeMessage() {
@@ -206,7 +204,7 @@ I wish we get one chance🧿 to make this work. ❤️🕊️
 
 <button onclick="changeMessage2()">up next!😊</button>
     `
-    appInsights.trackEvent({ name: "read_full_message", properties: { user: user } });
+    appInsights.trackEvent({ name: "read_full_message", properties: { user: user || "unknown" } });
   }
 
   function changeMessage2() {
@@ -224,7 +222,7 @@ I wish we get one chance🧿 to make this work. ❤️🕊️
 </br>
 <button onclick="likedit()">Like it?😊</button>
     `
-    appInsights.trackEvent({ name: "load_image", properties: { user: user } });
+    appInsights.trackEvent({ name: "load_image", properties: { user: user || "unknown" } });
   }
 
   function likedit() {
@@ -234,7 +232,7 @@ I wish we get one chance🧿 to make this work. ❤️🕊️
     <p>I didn’t expect you to click that… but I’m glad you did😉. Take care…</p>
 </br>
     `
-    appInsights.trackEvent({ name: "liked_it", properties: { user: user } });
+    appInsights.trackEvent({ name: "liked_it", properties: { user: user || "unknown" } });
   }
 
   
