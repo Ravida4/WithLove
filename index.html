@@ -222,8 +222,19 @@ I wish we get one chance🧿 to make this work. ❤️🕊️
   box-shadow:0 5px 15px rgba(0,0,0,0.2);
 ">
 </br>
+<button onclick="likedit()">Like it?😊</button>
     `
     appInsights.trackEvent({ name: "load_image", properties: { user: user } });
+  }
+
+  function likedit() {
+    document.getElementById("maindiv").innerHTML =
+    `
+      <div class="heart">❤️</div>
+    <p>I didn’t expect you to click that… but I’m glad you did. Take care…</p>
+</br>
+    `
+    appInsights.trackEvent({ name: "liked_it", properties: { user: user } });
   }
 
   
