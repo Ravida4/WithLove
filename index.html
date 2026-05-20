@@ -36,7 +36,10 @@
     opacity: 0;
   }
 }
-
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
     .card {
         position: relative;
       background: white;
@@ -127,9 +130,10 @@
 
 <div class="overlay" id="popup2">
   <div class="popup2">
-    <h3>🎵  And, this enables music.
+    <h3 style="text-decoration: line-through;">🎵  And, this enables music.
       Make sure you sit back at comfy place and volume up to atleast 20! </h3>
-    <button onclick="enableMusic()">Plaaay!</button>
+      <p>Now that you know this has music, I've removed button! Music starts in 3.. 2.. 1</p>
+    <!-- <button onclick="enableMusic()">Plaaay!</button> -->
   </div>
 </div>
 
@@ -210,6 +214,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     appInsights.trackEvent({ name: "popup1_closed", properties: { user: user || "unknown", txnId: txnId} });
    document.getElementById("popup2").style.display = 'flex';
+setTimeout(() => {
+  const popup = document.getElementById("popup2");
+
+  // Start fade out
+  popup.classList.add("fade-out");
+
+  // After fade completes, hide it
+  setTimeout(() => {
+    popup.style.display = "none";
+
+    document.getElementById("bgMusic").play();
+
+    appInsights.trackEvent({
+      name: "music_enabled_automatically",
+      properties: { user: user || "unknown", txnId: txnId }
+    });
+
+  }, 1000); // match CSS duration
+
+}, 9000);
   }
 
   function enableMusic() {
@@ -277,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     document.getElementById("maindiv").innerHTML = `
       <p style="font-size:16px;">
-        Wish to visit soon together🙂🤞
+        Just something that made me smile seeing at 🙂
       </p>
 
       <img src="./varanasi.jpg" style="width:220px;border-radius:15px;">
