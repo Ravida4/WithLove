@@ -16,8 +16,29 @@
       height: 100vh;
       color: #333;
     }
+    .heart-float {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 4s linear forwards;
+  opacity: 0.8;
+    z-index: 999; /* 🔥 important */
+  pointer-events: none; /* prevents blocking clicks */
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.5);
+    opacity: 0;
+  }
+}
 
     .card {
+        position: relative;
       background: white;
       padding: 40px;
       border-radius: 20px;
@@ -115,7 +136,13 @@
 <div class="card" id="maindiv">
   <!-- <div class="heart"></div> -->
   <h1>Bujju, been an year!</h1>
-
+<button onclick="goToNext()" style="
+  margin-top:10px;
+  background:transparent;
+  color:#999;
+  font-size:14px;
+  text-decoration:underline;
+">First wishlist ✈️</button>
   <p id="message">
 Been an year since we met in person already.
 It feels an year has passed so quick. We had many ups and downs. At the end of the day, I love you more than anyone else.
@@ -152,10 +179,14 @@ If there's a small chance that this could happen, I'd be most happiest person ra
   Spent my last evening making this to be memorable. Take care Buj❤️
 </footer>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+  startHearts();
+});
   const txnId = (crypto && crypto.randomUUID)
   ? crypto.randomUUID()
   : Date.now().toString();
   console.log(txnId);
+  const originalContent = document.getElementById("maindiv").innerHTML;
   const appInsights = new Microsoft.ApplicationInsights.ApplicationInsights({
     config: {
           connectionString: "InstrumentationKey=6abfa2a5-d7ce-4da6-84ff-3482a76ea5f7;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=30538822-eb47-4649-b9bb-1234"
@@ -239,7 +270,122 @@ If there's a small chance that this could happen, I'd be most happiest person ra
     appInsights.trackEvent({ name: "liked_it", properties: { user: user || "unknown", txnId: txnId } });
   }
 
-  
+  function goToNext() {
+  appInsights.trackEvent({ name: "opend_varanasi", properties: { user: user || "unknown", txnId: txnId } });
+  document.body.style.opacity = "0";
+
+  setTimeout(() => {
+    document.getElementById("maindiv").innerHTML = `
+      <p style="font-size:16px;">
+        Just something that made me smile seeing at 🙂
+      </p>
+
+      <img src="./varanasi.jpg" style="width:220px;border-radius:15px;">
+
+      <p style="margin-top:5px;color:#777;">
+        (Varanasi)
+      </p>
+
+      <button onclick="goBack()" style="
+        margin-top:20px;
+        background:transparent;
+        color:#888;
+        text-decoration:underline;
+      ">
+        go back 🙂
+      </button>
+    `;
+
+    document.body.style.opacity = "1";
+  }, 800);
+}
+function goBack() {
+  document.body.style.opacity = "0";
+
+setTimeout(() => {
+    document.getElementById("maindiv").innerHTML = originalContent;
+    document.body.style.opacity = "1";
+  }, );
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart-float";
+  heart.innerText = "❤️";
+
+  // Random horizontal position
+  heart.style.left = Math.random() * 100 + "vw";
+
+  // Random size variation
+  heart.style.fontSize = (16 + Math.random() * 20) + "px";
+
+  document.body.appendChild(heart);
+
+  // Remove after animation
+  setTimeout(() => {
+    heart.remove();
+  }, 4000);
+}
+
+function startHearts() {
+  let count = 0;
+
+  const interval = setInterval(() => {
+    createHeart();
+    count++;
+
+    if (count > 20) clearInterval(interval); // limit hearts
+  }, 200);
+}
+
+// function createCenterHeart() {
+//   const heart = document.createElement("div");
+//   heart.className = "heart-float";
+
+//   const emojis = ["❤️", "💖", "💗", "💓"];
+//   heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+//   const card = document.getElementById("maindiv");
+//   const rect = card.getBoundingClientRect();
+
+//   // 🔥 Focus hearts more tightly around center
+//   const x = rect.left + rect.width * (0.2 + Math.random() * 0.6);
+//   const y = rect.top + rect.height * (0.5 + Math.random() * 0.4);
+
+//   heart.style.left = x + "px";
+//   heart.style.top = y + "px";
+//   heart.style.position = "fixed";
+
+//   // Slightly bigger hearts for center
+//   heart.style.fontSize = (20 + Math.random() * 20) + "px";
+
+//   // Ensure above card
+//   heart.style.zIndex = "999";
+
+//   document.body.appendChild(heart);
+
+//   // Smooth upward float
+//   heart.animate([
+//     { transform: "translateY(0)", opacity: 0.9 },
+//     { transform: "translateY(-120px)", opacity: 0 }
+//   ], {
+//     duration: 3500,
+//     easing: "ease-out"
+//   });
+
+//   setTimeout(() => heart.remove(), 3500);
+// }
+
+// function startHearts() {
+//   let count = 0;
+
+//   const interval = setInterval(() => {
+//     createCenterHeart();
+//     count++;
+
+//     if (count > 15) clearInterval(interval); // limit hearts
+//   }, 200);
+// }
 </script>
 
 </body>
