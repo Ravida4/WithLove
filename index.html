@@ -209,11 +209,33 @@ document.addEventListener("DOMContentLoaded", () => {
       properties: { user: user || "unknown", txnId: txnId}
     });
   
+    function fadeInAudio(audio) {
+  let volume = 0;
+  const step = 0.02; // speed of fade
+  const interval = 100; // ms
+
+  const fade = setInterval(() => {
+    if (volume < 1) {
+      volume += step;
+      audio.volume = Math.min(volume, 1);
+    } else {
+      clearInterval(fade);
+    }
+  }, interval);
+}
+
   function okAnyways() {
     document.getElementById("popup1").style.display = "none";
 
     appInsights.trackEvent({ name: "popup1_closed", properties: { user: user || "unknown", txnId: txnId} });
    document.getElementById("popup2").style.display = 'flex';
+
+   setTimeout(() => {
+    const music = document.getElementById("bgMusic");
+music.volume = 0;
+music.play();
+fadeInAudio(music); 
+   }, 8500);
 setTimeout(() => {
   const popup = document.getElementById("popup2");
 
@@ -224,7 +246,7 @@ setTimeout(() => {
   setTimeout(() => {
     popup.style.display = "none";
 
-    document.getElementById("bgMusic").play();
+    // document.getElementById("bgMusic").play();
 
     appInsights.trackEvent({
       name: "music_enabled_automatically",
@@ -233,7 +255,7 @@ setTimeout(() => {
 
   }, 1000); // match CSS duration
 
-}, 7000);
+}, 9000);
   }
 
   function enableMusic() {
