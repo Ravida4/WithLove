@@ -184,7 +184,8 @@ If there's a small chance that this could happen, I'd be most happiest person ra
 </footer>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  startHearts();
+  startFloatingAnimation("❤️", 30);
+  updateDaysSince();
 });
   const txnId = (crypto && crypto.randomUUID)
   ? crypto.randomUUID()
@@ -354,10 +355,10 @@ setTimeout(() => {
   }, );
 }
 
-function createHeart() {
+function createFloatingAnimation(contentToFloat) {
   const heart = document.createElement("div");
   heart.className = "heart-float";
-  heart.innerText = "❤️";
+  heart.innerText = contentToFloat;
 
   // Random horizontal position
   heart.style.left = Math.random() * 100 + "vw";
@@ -373,15 +374,27 @@ function createHeart() {
   }, 4000);
 }
 
-function startHearts() {
+function startFloatingAnimation(contentToFloat, limitOfContent) {
   let count = 0;
 
   const interval = setInterval(() => {
-    createHeart();
+    createFloatingAnimation(contentToFloat);
     count++;
 
-    if (count > 20) clearInterval(interval); // limit hearts
+    if (count > limitOfContent) clearInterval(interval); // limit hearts
   }, 200);
+}
+
+function updateDaysSince() {
+  const startDate = new Date("2025-05-27");
+
+  const today = new Date();
+
+  const diffTime = today - startDate;
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  document.title = `${diffDays} days since us 🙂`;
+  startFloatingAnimation(document.title, 40);
 }
 
 // function createCenterHeart() {
