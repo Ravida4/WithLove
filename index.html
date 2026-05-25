@@ -393,7 +393,11 @@ function updateDaysSince() {
   const diffTime = today - startDate;
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-  document.title = `${diffDays} days since us 🙂`;
+  if (diffDays >= 365) {
+      document.title = `Happy 1 year anniversary💐`;
+  } else {
+      document.title = `${diffDays} days since us 🙂`;
+  }
   startFloatingAnimation(document.title, 40);
 }
 
