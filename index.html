@@ -9,7 +9,8 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      /* background: linear-gradient(to right, #ff9a9e, #fad0c4); */
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -61,6 +62,9 @@
       color: #e63946;
     }
 
+    customtag {
+      color: #ffd000;
+    }
     button {
       margin-top: 20px;
       padding: 10px 20px;
@@ -123,8 +127,8 @@
 
   <div class="overlay" id="popup1">
   <div class="popup1">
-    <h3>Buj, I'd recommend viewing this on desktop(/mode on phone)</h3>
-    <button onclick="okAnyways()">Ok, anyways!</button>
+    <h3 class="anniversary-header">Happy 1 year anniversary!</h3>
+    <button onclick="anniversaryButton()">💐</button>
   </div>
 </div>
 
@@ -139,7 +143,7 @@
 
 <div class="card" id="maindiv">
   <!-- <div class="heart"></div> -->
-  <h1>Bujju, been an year!</h1>
+  <h1>Bujju, been an year. <customtag>officially!</customtag></h1>
 <button onclick="goToNext()" style="
   margin-top:10px;
   background:transparent;
@@ -148,7 +152,7 @@
   text-decoration:underline;
 ">First wishlist ✈️</button>
   <p id="message">
-Been an year since we met in person already.
+Been an year since we made it official already.
 It feels an year has passed so quick. We had many ups and downs. At the end of the day, I love you more than anyone else.
 
 You will be my priority forever and will try to express myself different this time. I've known this for a while in relationship but being away from you has taught me very much on how you've become part of my life.
@@ -225,7 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, interval);
 }
 
-  function okAnyways() {
+  function anniversaryButton() {
     document.getElementById("popup1").style.display = "none";
 
     appInsights.trackEvent({ name: "popup1_closed", properties: { user: user || "unknown", txnId: txnId} });
@@ -393,7 +397,7 @@ function updateDaysSince() {
   const diffTime = today - startDate;
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-  if (diffDays >= 365) {
+  if (diffDays >= 364) {
       document.title = `Happy 1 year anniversary💐`;
   } else {
       document.title = `${diffDays} days since us 🙂`;
