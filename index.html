@@ -460,7 +460,7 @@ function updateDaysSince() {
   const diffTime = today - startDate;
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-  if (diffDays >= 365) {
+  if (diffDays >= 364) {
       document.title = `Happy 1 year anniversary💐`;
   } else {
       document.title = `${diffDays} days since us 🙂`;
