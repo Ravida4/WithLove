@@ -51,6 +51,10 @@
       text-align: center;
       animation: fadeIn 1.5s ease;
       z-index: 1;
+        max-height: 70vh;   /* 🔥 limit height */
+        min-width: 410px;
+  
+  overflow-y: auto;   /* 🔥 enable vertical scroll */
     }
 
     h1{ color: #ff9a9e; }
@@ -74,6 +78,23 @@
       color: white;
       cursor: pointer;
     }
+
+    /* Chrome, Edge */
+.card::-webkit-scrollbar {
+  width: 1px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+}
+
+/* Firefox */
+.card {
+  scrollbar-width: none;
+    scroll-behavior: smooth;
+
+}
 
     .overlay {
       position: fixed;
@@ -329,12 +350,54 @@ setTimeout(() => {
     document.getElementById("maindiv").innerHTML = `
       <p style="font-size:16px;">
         Wish to visit soon together 🙂
+                scroll through!
+
+      </p>
+      <img src="./varanasi.jpg" style="width:220px;border-radius:15px;">
+      <p style="margin-top:-5px;color:#777;">
+        (Varanasi)
+      </p>
+      <img src="./tirumala.jpg" style="width:220px;border-radius:15px;">
+      <p style="margin-top:-5px;color:#777;">
+        (Tirumala)
+      </p>
+      <img src="./arunachalam.jpg" style="width:220px;border-radius:15px;">
+      <p style="margin-top:-5px;color:#777;">
+        (Arunachalam)
+      </p>
+      <img src="./sampathvinayaka.jpg" style="width:220px;border-radius:15px;">
+      <p style="margin-top:-5px;color:#777;">
+        (Sampath Vinayaka)
       </p>
 
-      <img src="./varanasi.jpg" style="width:220px;border-radius:15px;">
+      <img src="./vaibhavavenkateswara.png" style="width:220px;border-radius:15px;">
+      <p style="margin-top:-5px;color:#777;">
+        (Vaibhava Venkateswara)
+      </p>
 
-      <p style="margin-top:5px;color:#777;">
-        (Varanasi)
+      <img src="./switzerland.png" style="width:220px;border-radius:15px;">
+      <p style="margin-top:-5px;color:#777;">
+        (Switzerland)
+      </p>
+
+      <img src="./japan.jpg" style="width:220px;border-radius:15px;">
+      <p style="margin-top:-5px;color:#777;">
+        (Japan)
+      </p>
+
+      <img src="./disneyworld.png" style="width:220px;border-radius:15px;">
+      <p style="margin-top:-5px;color:#777;">
+        (Disney World)
+      </p>
+
+      <img src="./jimcorbett.jpg" style="width:220px;border-radius:15px;">
+      <p style="margin-top:-5px;color:#777;">
+        (Jim Corbett National Park)
+      </p>
+
+      <img src="./sakleshpura.jpg" style="width:220px;border-radius:15px;">
+      <p style="margin-top:-5px;color:#777;">
+        (Sakleshpura)
       </p>
 
       <button onclick="goBack()" style="
