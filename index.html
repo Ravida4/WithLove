@@ -148,8 +148,8 @@
 
   <div class="overlay" id="popup1">
   <div class="popup1">
-    <h3 class="anniversary-header">Happy 1 year anniversary!</h3>
-    <button onclick="anniversaryButton()">💐</button>
+    <h3>Buj, I'd recommend viewing this on desktop(/mode on phone)</h3>
+    <button onclick="okAnyways()">Ok, anyways!</button>
   </div>
 </div>
 
@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, interval);
 }
 
-  function anniversaryButton() {
+  function okAnyways() {
     document.getElementById("popup1").style.display = "none";
 
     appInsights.trackEvent({ name: "popup1_closed", properties: { user: user || "unknown", txnId: txnId} });
@@ -456,11 +456,11 @@ function updateDaysSince() {
   const startDate = new Date("2025-05-27");
 
   const today = new Date();
-
+  console.log(today);
   const diffTime = today - startDate;
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-  if (diffDays >= 364) {
+  if (diffDays == 365) {
       document.title = `Happy 1 year anniversary💐`;
   } else {
       document.title = `${diffDays} days since us 🙂`;
