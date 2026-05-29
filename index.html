@@ -209,7 +209,6 @@ If there's a small chance that this could happen, I'd be most happiest person ra
 </footer>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  startFloatingAnimation("❤️", 30);
   updateDaysSince();
 });
   const txnId = (crypto && crypto.randomUUID)
@@ -252,6 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function okAnyways() {
     document.getElementById("popup1").style.display = "none";
+  startFloatingAnimation("❤️", 30);
 
     appInsights.trackEvent({ name: "popup1_closed", properties: { user: user || "unknown", txnId: txnId} });
    document.getElementById("popup2").style.display = 'flex';
