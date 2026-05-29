@@ -149,7 +149,7 @@
   <div class="overlay" id="popup1">
   <div class="popup1">
     <h3>Buj, I'd recommend viewing this on desktop(/mode on phone)</h3>
-    <button onclick="okAnyways()">Ok, anyways!</button>
+    <button onclick="okAnyways()" id="funBtn">Ok, anyways!</button>
   </div>
 </div>
 
@@ -467,6 +467,31 @@ function updateDaysSince() {
   }
   startFloatingAnimation(document.title, 40);
 }
+
+let hoverCount = 0;
+const maxHovers = 4;
+const btn = document.getElementById("funBtn");
+
+btn.addEventListener("mouseenter", () => {
+  if (hoverCount === 0) btn.innerText = "Nope 😛";
+if (hoverCount === 1) btn.innerText = "Try again 😏";
+if (hoverCount === 2) btn.innerText = "Almost 😆";
+if (hoverCount === 3) btn.innerText = "Okay last try 😅";
+if (hoverCount === 4) btn.innerText = "Fine, click me 🙂";
+  if (hoverCount < maxHovers) {
+    hoverCount++;
+
+    // Move randomly
+    const x = (Math.random() - 0.5) * 400; // left/right
+    const y = (Math.random() - 0.5) * 500; // up/down
+
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+    appInsights.trackEvent({ name: "hovered_fivetimes", properties: { user: user || "unknown", txnId: txnId } });
+  } else {
+    // Reset position after 5 tries
+    btn.style.transform = "translate(0,0)";
+  }
+});
 
 // function createCenterHeart() {
 //   const heart = document.createElement("div");
