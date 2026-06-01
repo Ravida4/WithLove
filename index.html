@@ -146,6 +146,24 @@
 
 <body>
 
+  <div id="rainNote" style="
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ffffff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  font-size: 14px;
+  color: #555;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 999;
+">
+Rainy season reminder 🌧️ </br></br>
+Stay warm and don’t fall sick🤧.  Don’t ignore cold & cough 🙂
+</div>
+
   <div class="overlay" id="popup1">
   <div class="popup1">
     <h3>Buj, I'd recommend viewing this on desktop(/mode on phone)</h3>
@@ -211,6 +229,7 @@ If there's a small chance that this could happen, I'd be most happiest person ra
 document.addEventListener("DOMContentLoaded", () => {
   updateDaysSince();
 });
+
   const txnId = (crypto && crypto.randomUUID)
   ? crypto.randomUUID()
   : Date.now().toString();
@@ -248,6 +267,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, interval);
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  const note = document.getElementById("rainNote");
+
+  // Fade in
+  setTimeout(() => {
+    note.style.opacity = "1";
+  }, 800);
+
+  // Fade out after 5 sec
+  setTimeout(() => {
+    note.style.opacity = "0";
+  }, 5000);
+});
 
   function okAnyways() {
     document.getElementById("popup1").style.display = "none";
