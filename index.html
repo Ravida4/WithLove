@@ -139,6 +139,64 @@
       from { opacity: 0; transform: translateY(20px);}
       to { opacity: 1; }
     }
+
+.forgiveness-box {
+  display: none; /* 👈 hidden initially */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  width: 220px;
+  padding: 12px;
+
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+
+  text-align: center;
+  font-size: 13px;
+
+  z-index: 999; /* ensure it's on top */
+   opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* meter */
+.meter {
+  width: 100%;
+  height: 14px;
+  background: #eee;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+#progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  transition: width 0.4s ease;
+}
+
+/* button styling */
+.forgiveness-box button {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 15px;
+  background: #ff9a9e;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* text */
+#forgiveText {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #666;
+}
+
   </style>
 
   <script src="https://js.monitor.azure.com/scripts/b/ai.2.min.js"></script>
@@ -170,7 +228,17 @@ Stay warm and don’t fall sick🤧.  Don’t ignore cold & cough 🙂
     <button onclick="okAnyways()" id="funBtn">Ok, anyways!</button>
   </div>
 </div>
+<div class="forgiveness-box">
+  <p>Forgiveness Meter 💛</p>
 
+  <div class="meter">
+    <div id="progress"></div>
+  </div>
+
+  <button id="forgiveButton" onclick="increaseForgiveness()">Try to forgive me 😅</button>
+
+  <p id="forgiveText"></p>
+</div>
 <div class="overlay" id="popup2">
   <div class="popup2">
     <h3 style="text-decoration: line-through;">🎵  And, this enables music.
@@ -268,18 +336,52 @@ document.addEventListener("DOMContentLoaded", () => {
   }, interval);
 }
 
+// window.addEventListener("DOMContentLoaded", () => {
+//   const note = document.getElementById("rainNote");
+
+//   // Fade in
+//   setTimeout(() => {
+//     note.style.opacity = "1";
+//   }, 800);
+
+//   // Fade out after 5 sec
+//   setTimeout(() => {
+//     note.style.opacity = "0";
+//   }, 10500);
+  
+// });
+
 window.addEventListener("DOMContentLoaded", () => {
   const note = document.getElementById("rainNote");
+  const meter = document.querySelector(".forgiveness-box");
 
-  // Fade in
+  // Hide meter initially
+  meter.style.display = "none";
+  meter.style.opacity = "0";
+
+  // Fade in rain
   setTimeout(() => {
     note.style.opacity = "1";
   }, 800);
 
-  // Fade out after 5 sec
+  // Fade out rain
   setTimeout(() => {
     note.style.opacity = "0";
-  }, 10500);
+
+    // After fade-out completes (~1s), show meter
+    setTimeout(() => {
+      note.style.display = "none";
+
+      meter.style.display = "block";
+
+      // smooth fade-in
+      setTimeout(() => {
+        meter.style.opacity = "1";
+      }, 100);
+
+    }, 800); // match your CSS transition duration
+
+  }, 14500);
 });
 
   function okAnyways() {
@@ -374,6 +476,46 @@ setTimeout(() => {
     `
     appInsights.trackEvent({ name: "liked_it", properties: { user: user || "unknown", txnId: txnId } });
   }
+
+  const btn1 = document.getElementById("forgiveButton");
+
+btn1.addEventListener("click", () => {
+  btn1.style.transform = "scale(0.95)";
+  setTimeout(() => {
+    btn1.style.transform = "scale(1)";
+  }, 100);
+});
+
+let forgiveness = 0;
+
+function increaseForgiveness() {
+  if (forgiveness < 100) {
+    forgiveness += 30
+  if (forgiveness >= 100) {
+    startFloatingAnimation("💛", 30);
+    forgiveness = 100;
+  }
+  console.log(forgiveness);
+  appInsights.trackEvent({ name: "forgiveness_meter", properties: { user: user || "unknown", txnId: txnId, "forgivenessScore": forgiveness } });
+  document.getElementById("progress").style.width = forgiveness + "%";
+
+  updateText();
+  }
+}
+
+function updateText() {
+  const text = document.getElementById("forgiveText");
+
+  if (forgiveness <= 30) {
+    text.innerText = "Hmm… not yet 😏";
+  } else if (forgiveness <= 60) {
+    text.innerText = "Okay… maybe a little 🙂";
+  } else if (forgiveness <= 90) {
+    text.innerText = "You’re getting there 😌";
+  } else {
+    text.innerText = "Fine… I forgive you 💛";
+  }
+}
 
   function goToNext() {
   appInsights.trackEvent({ name: "opend_varanasi", properties: { user: user || "unknown", txnId: txnId } });
