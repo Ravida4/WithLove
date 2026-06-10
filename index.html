@@ -506,9 +506,9 @@ const popup = document.getElementById('descriptionitempopup');
 
 items.forEach(item => {
   item.addEventListener('mouseenter', (e) => {
-    appInsights.trackEvent({ name: "hovered_events", properties: { user: user || "unknown", txnId: txnId } });
     popup.innerText = item.getAttribute('data-desc');
     popup.style.opacity = '1';
+    appInsights.trackEvent({ name: "hovered_events", properties: { user: user || "unknown", txnId: txnId , description: popup.innerText} });
   });
 
   item.addEventListener('mousemove', (e) => {
@@ -526,6 +526,7 @@ boxes.forEach(item => {
   item.addEventListener('mouseenter', (e) => {
     popup.innerText = item.getAttribute('data-desc');
     popup.style.opacity = '1';
+    appInsights.trackEvent({ name: "hovered_events", properties: { user: user || "unknown", txnId: txnId , description: popup.innerText} });
   });
 
   item.addEventListener('mousemove', (e) => {
