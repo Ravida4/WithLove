@@ -286,6 +286,7 @@
   position: relative;
   width: 200px;
   height: 20px;
+    transition: transform 0.2s ease;
 }
 
 /* dots on line */
@@ -299,40 +300,75 @@
   background: #ffcc00;
   border-radius: 50%;
 }
+/* .item {
+  transition: transform 0.2s ease;
+} */
+
+.item:hover {
+  animation: wobble 0.4s ease;
+  transform: scale(1.02);
+}
+
+.box:hover {
+  animation: wobble 0.4s ease;
+  transform: scale(1.02);
+}
+.descriptionitempopup {
+  position: absolute;
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.2s ease;
+  max-width: 200px;
+  z-index: 10;
+}
+
+.hint {
+  font-size: 11px;
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-style: italic;
+}
   </style>
 
   <script src="https://js.monitor.azure.com/scripts/b/ai.2.min.js"></script>
 </head>
 
 <body>
+  <div id="descriptionitempopup" class="descriptionitempopup"></div>
 <div class="timeline-box">
 
   <!-- TOP BOXES -->
   <div class="top-row">
-    <div class="box">Guntur 🌿</div>
-    <div class="box">Vizag 🌊</div>
+    <div class="box" data-desc="🌿 From somewhere calm…">Guntur 🌿</div>
+    <div class="box" data-desc="🌊 From somewhere by the waves…">Vizag 🌊</div>
   </div>
 
   <!-- MERGE BOX -->
   <div class="merge-box">
-    <div class="box highlight">Bangalore 💛</div>
+    <div class="box highlight" data-desc="💛 Where our worlds met">Bangalore 💛</div>
   </div>
 
   <!-- VERTICAL TIMELINE -->
   <div class="timeline">
-    <div class="item">🍵 First meet - Third wave coffee</div>
-    <div class="item">🍦 Cream stone</div>
-    <div class="item">👫 Many walks together</div>
-    <div class="item">💍 Proposal</div>
-    <div class="item">👨‍💻 Prep & Cafe visits</div>
-    <div class="item">🌊 First time in Vizag together</div>
-    <div class="item">🎬 Movies together</div>
-    <div class="item">🏠 Told at home</div>
-    <div class="item">🚗 Drive on beach road</div>
-    <div class="item">🚣 Kayaking day</div>
-    <div class="item final">⏳ ...</div>
+    <div class="item" data-desc="The day it all began ✨">🍵 First meet - Third wave coffee</div>
+    <div class="item" data-desc="Our first selfieee 📸">🍦 Cream stone</div>
+    <div class="item" data-desc="Understanding eachother. Hugs on the tree 😂">👫 Many walks together</div>
+    <div class="item" data-desc="Promise has been made 🤗">💍 Proposal</div>
+    <div class="item" data-desc="Lots of Striver preps & cafe visits">👨‍💻 Prep & Cafe visits</div>
+    <div class="item" data-desc="Missed you a lot that I got a free flight ticket ✈️💛😄">🌊 First time in Vizag together</div>
+    <div class="item" data-desc="Someone's been F1 and PK fan for sure! 🏎️">🎬 Movies together</div>
+    <div class="item" data-desc="Understanding at home">🏠 Told at home</div>
+    <div class="item" data-desc="Wishlist checked ✅">🚗 Drive on beach road</div>
+    <div class="item" data-desc="A refreshing day with a drive 🚗🌿 Wish there were more days like this">🚣 Kayaking day</div>
+    <div class="item final" data-desc="Keep goingg">⏳ ...</div>
   </div>
-
+<div class="hint">Hover on moments ✨</div>
 </div>
   <div id="rainNote" style="
   position: fixed;
@@ -465,7 +501,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, interval);
 }
+const items = document.querySelectorAll('.item');
+const popup = document.getElementById('descriptionitempopup');
 
+items.forEach(item => {
+  item.addEventListener('mouseenter', (e) => {
+    appInsights.trackEvent({ name: "hovered_events", properties: { user: user || "unknown", txnId: txnId } });
+    popup.innerText = item.getAttribute('data-desc');
+    popup.style.opacity = '1';
+  });
+
+  item.addEventListener('mousemove', (e) => {
+    popup.style.left = e.pageX + 10 + 'px';
+    popup.style.top = e.pageY + 10 + 'px';
+  });
+
+  item.addEventListener('mouseleave', () => {
+    popup.style.opacity = '0';
+  });
+});
+
+const boxes = document.querySelectorAll('.box');
+boxes.forEach(item => {
+  item.addEventListener('mouseenter', (e) => {
+    popup.innerText = item.getAttribute('data-desc');
+    popup.style.opacity = '1';
+  });
+
+  item.addEventListener('mousemove', (e) => {
+    popup.style.left = e.pageX + 10 + 'px';
+    popup.style.top = e.pageY + 10 + 'px';
+  });
+
+  item.addEventListener('mouseleave', () => {
+    popup.style.opacity = '0';
+  });
+});
 // window.addEventListener("DOMContentLoaded", () => {
 //   const note = document.getElementById("rainNote");
 
