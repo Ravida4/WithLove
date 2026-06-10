@@ -647,7 +647,7 @@ function updateText() {
 }
 
   function goToNext() {
-  appInsights.trackEvent({ name: "opend_varanasi", properties: { user: user || "unknown", txnId: txnId } });
+  appInsights.trackEvent({ name: "opened_varanasi", properties: { user: user || "unknown", txnId: txnId } });
   document.body.style.opacity = "0";
 
   setTimeout(() => {
