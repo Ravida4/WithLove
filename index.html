@@ -69,6 +69,11 @@
     customtag {
       color: #ffd000;
     }
+    customtag2 {
+      color: #ffd000;
+      font-weight: bold;
+    }
+
     button {
       margin-top: 20px;
       padding: 10px 20px;
@@ -366,7 +371,8 @@
     <div class="item" data-desc="Understanding at home">🏠 Told at home</div>
     <div class="item" data-desc="Wishlist checked ✅">🚗 Drive on beach road</div>
     <div class="item" data-desc="A refreshing day with a drive 🚗🌿 Wish there are more days like this">🚣 Kayaking day</div>
-    <div class="item final" data-desc="Keep goingg">⏳ ...</div>
+    <div class="item final" data-desc="17th June">🏠 Talk with her parents</div>
+    <div class="item final" data-desc="17th June">🧿 Working on growing stronger</div>
   </div>
 <div class="hint">Hover on moments ✨</div>
 </div>
@@ -428,11 +434,11 @@ Stay warm and don’t fall sick🤧.  Don’t ignore cold & cough 🙂
 Been an year since we made it official already.
 It feels an year has passed so quick. We had many ups and downs. At the end of the day, I love you more than anyone else.
 
-You will be my priority forever and will try to express myself different this time. I've known this for a while in relationship but being away from you has taught me very much on how you've become part of my life.
+<customtag2>Somehow, through all the distance, silence, and time, we found our way back to each other—and that means more than I can put into words.
+If there’s one thing I truly wish for, it’s that we rise from here stronger, softer, and more understanding, and continue writing our story with a little more care and a lot more heart.
+Your presence and support in this phase have been quietly powerful. I see it, I feel it, and I hold it close. It’s not something I take lightly—and in my own way, I promise to grow into someone who deserves it, every single day.
 
-I miss what we had Buj, like really. And I would really like another chance to do this right — with more respect, patience, and care. Ninnu jagrathaga chuskunta "<3"
-
-If there's a small chance that this could happen, I'd be most happiest person ra.
+</customtag2>
   </p>
 
   <button onclick="changeMessage()">Next...</button>
@@ -848,26 +854,26 @@ let hoverCount = 0;
 const maxHovers = 4;
 const btn = document.getElementById("funBtn");
 
-btn.addEventListener("mouseenter", () => {
-  if (hoverCount === 0) btn.innerText = "Nope 😛";
-if (hoverCount === 1) btn.innerText = "Try again 😏";
-if (hoverCount === 2) btn.innerText = "Almost 😆";
-if (hoverCount === 3) btn.innerText = "Okay last try 😅";
-if (hoverCount === 4) btn.innerText = "Fine, click me 🙂";
-  if (hoverCount < maxHovers) {
-    hoverCount++;
+//btn.addEventListener("mouseenter", () => {
+ // if (hoverCount === 0) btn.innerText = "Nope 😛";
+//if (hoverCount === 1) btn.innerText = "Try again 😏";
+//if (hoverCount === 2) btn.innerText = "Almost 😆";
+//if (hoverCount === 3) btn.innerText = "Okay last try 😅";
+//if (hoverCount === 4) btn.innerText = "Fine, click me 🙂";
+//  if (hoverCount < maxHovers) {
+//    hoverCount++;
 
     // Move randomly
-    const x = (Math.random() - 0.5) * 400; // left/right
-    const y = (Math.random() - 0.5) * 500; // up/down
+//    const x = (Math.random() - 0.5) * 400; // left/right
+//    const y = (Math.random() - 0.5) * 500; // up/down
 
-    btn.style.transform = `translate(${x}px, ${y}px)`;
-    appInsights.trackEvent({ name: "hovered_fivetimes", properties: { user: user || "unknown", txnId: txnId } });
-  } else {
+//    btn.style.transform = `translate(${x}px, ${y}px)`;
+//    appInsights.trackEvent({ name: "hovered_fivetimes", properties: { user: user || "unknown", txnId: txnId } });
+//  } else {
     // Reset position after 5 tries
-    btn.style.transform = "translate(0,0)";
-  }
-});
+//    btn.style.transform = "translate(0,0)";
+//  }
+//});
 
 // function createCenterHeart() {
 //   const heart = document.createElement("div");
