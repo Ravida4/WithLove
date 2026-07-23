@@ -70,7 +70,7 @@
       color: #ffd000;
     }
     customtag2 {
-      color: #ff9a9e;
+      color: #ffd000;
       font-weight: bold;
     }
 
@@ -117,7 +117,6 @@
       padding: 25px;
       border-radius: 15px;
       text-align: center;
-      width: 1200px;
     }
 
     #popup2 {
@@ -398,14 +397,8 @@ Stay warm and don’t fall sick🤧.  Don’t ignore cold & cough 🙂
 
   <div class="overlay" id="popup1">
   <div class="popup1">
-    <customtag2>🎂💜 Happy Birthday, Bujji.</customtag2>
-    </br>    </br>
-Today, I celebrate you—the kind soul, the beautiful heart, and the person who has taught me so much about love, patience, and growth. Thank you for every memory we've written together and for every little moment that still makes me smile.
-I hope this year wraps you in happiness, gives you the courage to chase your dreams, and fills your heart with everything you've ever wished for.
-    </br>
-And if I could add one little wish of my own… ✨
-May our story continue to bloom into something even more beautiful, stronger, and filled with endless smiles. 🌸💜
-    <button onclick="okAnyways()" id="funBtn">Thank you!</button>
+    <h3>Buj, I'd recommend viewing this on desktop(/mode on phone)</h3>
+    <button onclick="okAnyways()" id="funBtn">Ok, anyways!</button>
   </div>
 </div>
 <div class="forgiveness-box">
@@ -846,20 +839,15 @@ function updateDaysSince() {
   const startDate = new Date("2025-05-27");
 
   const today = new Date();
-  const target = new Date(2026, 6, 17);
   console.log(today);
   const diffTime = today - startDate;
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  console.log(target);
-        document.title = `Bujju, Happy Birthday 🎂 🎉✨`;
 
-  // if (today.toDateString() === target.toDateString()) {
-  //     document.title = `Bujju, Happy Birthday 🎂 🎉✨`;
-  // } else if (diffDays == 365) {
-  //     document.title = `Happy 1 year anniversary💐`;
-  // } else {
-  //     document.title = `${diffDays} days since us 🙂`;
-  // }
+  if (diffDays == 365) {
+      document.title = `Happy 1 year anniversary💐`;
+  } else {
+      document.title = `${diffDays} days since us 🙂`;
+  }
   startFloatingAnimation(document.title, 40);
 }
 
